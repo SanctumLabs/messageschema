@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package sanctumlabs.events.signup.v1;
+
+import "validate/validate.proto";
+import "sanctumlabs/events/events.proto";
+import "sanctumlabs/events/signup/v1/data.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "SignupEventsProto";
+option java_package = "com.sanctumlabs.events.model.signup.v1";
+option (sanctumlabs.events.domain) = "signup";
+option (sanctumlabs.events.grouping) = "signup";
+
+message SignupStarted {
+  option (yoco.events.event_type) = "signup_started";
+
+  yoco.events.signup.v1.Signup signup = 1 [(validate.rules).message.required = true];
+}

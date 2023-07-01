@@ -1,0 +1,14 @@
+version: v1
+plugins:
+  - plugin: buf.build/protocolbuffers/python:v23.2
+    out: lib/python
+    revision: 1
+  - plugin: buf.build/community/nipunn1313-mypy:v3.4.0
+    out: lib/python
+    revision: 1
+  - plugin: buf.build/protocolbuffers/java:v22.3
+    out: lib/java/src/main/java
+    revision: 1
+  - plugin: buf.build/bufbuild/validate-java:v1.0.0
+    out: lib/java/src/main/java
+    revision: 1

@@ -1,0 +1,19 @@
+version: v1
+name: buf.build/sanctumlab/eventing
+deps:
+  - buf.build/sanctumlab/shared
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  except:
+    - ENUM_VALUE_PREFIX
+  ignore_only:
+    ENUM_ZERO_VALUE_SUFFIX:
+      - sanctumlabs/events/transaction/v1/data.proto
+    ENUM_VALUE_UPPER_SNAKE_CASE:
+      - sanctumlabs/events/transaction/v1/data.proto
+    PACKAGE_VERSION_SUFFIX:
+      - sanctumlabs/events/events.proto

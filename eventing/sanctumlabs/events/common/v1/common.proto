@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package sanctumlabs.events.common.v1;
+
+import "validate/validate.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "CommonProto";
+option java_package = "com.sanctumlabs.events.model.common.v1";
+
+message ConnectionDetails {
+  string connection_type = 1 [(validate.rules).string.min_len = 1];
+
+  optional string network_name = 2;
+}
+
+message Failure {
+  string code = 1 [(validate.rules).string.min_len = 1];
+
+  string reason = 2 [(validate.rules).string.min_len = 1];
+
+  optional string category = 3;
+}

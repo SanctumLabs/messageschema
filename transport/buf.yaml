@@ -1,0 +1,10 @@
+version: v1
+name: buf.build/sanctumlab/kafka
+deps:
+  - buf.build/sanctumlab/eventing
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT

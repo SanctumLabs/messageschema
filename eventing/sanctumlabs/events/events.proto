@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package sanctumlabs.events;
+
+import "google/protobuf/descriptor.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "EventsProto";
+option java_package = "com.sanctumlabs.events.model";
+
+extend google.protobuf.FileOptions {
+  // The domain (e.g. "payments") that owns the Events described in this file.
+  string domain = 11716485;
+
+  // TODO: document me
+  string grouping = 11716486;
+}
+
+extend google.protobuf.MessageOptions {
+  // The Event type (e.g. "transaction_completed") that relates to this message.
+  string event_type = 11716487;
+
+  // TODO: document me
+  repeated string tags = 11716488;
+}

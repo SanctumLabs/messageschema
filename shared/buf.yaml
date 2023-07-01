@@ -1,0 +1,12 @@
+version: v1
+name: buf.build/sanctumlab/shared
+deps:
+  - buf.build/envoyproxy/protoc-gen-validate
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  except:
+    - ENUM_VALUE_PREFIX
