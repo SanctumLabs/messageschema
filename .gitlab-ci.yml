@@ -1,0 +1,76 @@
+image:
+  name: bufbuild/buf:1.17.0
+  entrypoint: [""]
+
+variables:
+  BUF_CACHE_DIR: ".cache"
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  untracked: false
+  paths:
+    - ".cache"
+
+stages:
+  - build
+  - deploy
+
+lint:
+  stage: build
+  script:
+    - buf format -d --exit-code
+    - buf lint
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
+      when: never
+    - if: "$CI_COMMIT_BRANCH"
+
+breaking:
+  stage: build
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - buf breaking --against "${CI_REPOSITORY_URL}#branch=${CI_MERGE_REQUEST_TARGET_BRANCH_NAME}"
+
+generate:
+  stage: build
+  script:
+    - buf generate
+  artifacts:
+    paths:
+      - "lib"
+    when: always
+
+push-buf-registry:
+  stage: deploy
+  script:
+    - echo ${BUF_API_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
+    - buf push shared -t "${CI_COMMIT_TAG}"
+    - buf push eventing -t "${CI_COMMIT_TAG}"
+    - buf push transport -t "${CI_COMMIT_TAG}"
+  only:
+    - tags
+
+publish-python:
+  stage: deploy
+  image: python:3.8
+  before_script:
+    - bin/ci/pypi-setup.sh
+  script:
+    - cd lib/python
+    - make publish-gitlab
+  only:
+    - tags
+
+publish-java:
+  stage: deploy
+  image: gradle:7.4-jdk8
+  before_script:
+    - bin/ci/build-setup.sh
+  script:
+    - cd lib/java
+    - ./gradlew -Pversion="${CI_COMMIT_TAG}" artifactoryPublish
+  only:
+    - tags

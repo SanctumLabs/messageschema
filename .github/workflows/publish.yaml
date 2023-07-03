@@ -1,0 +1,32 @@
+name: Publish Packages
+
+on:
+  workflow_run:
+    workflows:
+      - "Build"
+    types:
+      - completed
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  publish-pypi:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    name: Publish Python package
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup
+        run: bin/ci/pypi-setup.sh
+
+      - name: Publish
+        env:
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}      
+        run: |
+          cd lib/python
+          make publish-pypi
