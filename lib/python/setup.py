@@ -1,0 +1,19 @@
+from setuptools import setup, find_packages
+import os
+
+version = os.environ.get("CI_COMMIT_TAG", os.environ.get("CI_JOB_ID", "0.1-dev"))
+
+setup(
+    name="sanctumlabs-models-py",
+    version=version,
+    description="Shared data models for Sanctum Labs services",
+    author="Brian Lusina",
+    author_email="1178317-BrianLusina@users.noreply.gitlab.com",
+    license="Proprietary",
+    url="https://gitlab.com/sanctumlabs/libraries/messagedefs",
+    packages=find_packages(),
+    package_data={"sanctumlabs": ["py.typed", "*.pyi", "**/*.pyi"]},
+    zip_safe=False,
+    python_requires=">=3.6",
+    install_requires=["protobuf >= 4.22.4", "protoc-gen-validate >= 1.0.0"],
+)
