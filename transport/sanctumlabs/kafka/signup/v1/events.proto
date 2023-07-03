@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package yoco.sanctumlabs.signup.v1;
+package sanctumlabs.kafka.signup.v1;
 
 import "validate/validate.proto";
 import "sanctumlabs/events/envelope/v1/envelope.proto";
@@ -14,13 +14,13 @@ option (sanctumlabs.events.domain) = "signup";
 option (sanctumlabs.events.grouping) = "signup";
 
 message SignupV1 {
-  option (yoco.events.event_type) = "signup_v1";
+  option (sanctumlabs.events.event_type) = "signup_v1";
 
-  yoco.events.envelope.v1.EventFields event_fields = 1 [(validate.rules).message.required = true];
+  sanctumlabs.events.envelope.v1.EventFields event_fields = 1 [(validate.rules).message.required = true];
 
   oneof payload {
     option (validate.required) = true;
 
-    yoco.events.signup.v1.SignupStarted signup_started = 2;
+    sanctumlabs.events.signup.v1.SignupStarted signup_started = 2;
   }
 }
