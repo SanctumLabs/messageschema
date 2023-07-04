@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/sanctumlab/kafka
+name: buf.build/sanctumlab/transport
 deps:
   - buf.build/sanctumlab/eventing
 breaking:

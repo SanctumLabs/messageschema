@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package sanctumlabs.kafka.signup.v1;
+package sanctumlabs.transport.signup.v1;
 
-import "validate/validate.proto";
 import "sanctumlabs/events/envelope/v1/envelope.proto";
 import "sanctumlabs/events/events.proto";
 import "sanctumlabs/events/signup/v1/events.proto";
+import "validate/validate.proto";
 
 option java_multiple_files = true;
 option java_outer_classname = "SignupTopicProto";
-option java_package = "com.sanctumlabs.kafka.signup.v1";
+option java_package = "com.sanctumlabs.transport.signup.v1";
 option (sanctumlabs.events.domain) = "signup";
 option (sanctumlabs.events.grouping) = "signup";
 

@@ -8,10 +8,7 @@ build: clean
 	find sanctumlabs -type d -exec touch {}/__init__.py \;
 	touch sanctumlabs/py.typed
 	python -m build
-
-publish: build
-	twine upload --repository-url https://yocotechnologies.jfrog.io/artifactory/api/pypi/pypi-local dist/*
-
+	
 publish-pypi: build
 	twine upload --verbose -u '__token__' dist/*
 
