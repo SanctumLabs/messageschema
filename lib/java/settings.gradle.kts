@@ -1,1 +1,1 @@
-rootProject.name = "sanctumlab-models"
+rootProject.name = "messagedefs"

@@ -1,0 +1,33 @@
+# This workflow will build a buf project
+# for more information view https://buf.build/docs/ci-cd/github-actions/
+name: Build
+
+on:
+  workflow_run:
+    workflows:
+      - "Lint"
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Buf generate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Buf Setup
+        uses: bufbuild/buf-setup-action@v1
+
+      - name: Generate
+        run: buf generate
+      
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: lib
+          path: |
+            lib
+          retention-days: 7
