@@ -29,7 +29,7 @@ repositories {
 
 dependencies {
   api("com.google.protobuf:protobuf-java:3.22.3")
-  api("build.buf.protoc-gen-validate:pgv-java-stub:1.0.0")
+  api("build.buf.protoc-gen-validate:pgv-java-stub:1.0.2")
 }
 
 java {
