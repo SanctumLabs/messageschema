@@ -22,9 +22,6 @@ lint:
   script:
     - buf format -d --exit-code
     - buf lint
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: "$CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS"
 
 breaking:
   stage: build
@@ -63,8 +60,6 @@ publish-python:
   image: python:3.8
   needs:
     - push-buf-registry
-  before_script:
-    - bin/ci/pypi-setup.sh
   script:
     - cd lib/python
     - make publish-gitlab
