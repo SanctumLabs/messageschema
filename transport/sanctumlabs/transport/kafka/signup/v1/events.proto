@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package sanctumlabs.transport.signup.v1;
+package sanctumlabs.transport.kafka.signup.v1;
 
 import "sanctumlabs/events/envelope/v1/envelope.proto";
 import "sanctumlabs/events/events.proto";
