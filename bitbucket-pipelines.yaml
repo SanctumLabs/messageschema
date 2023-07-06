@@ -1,0 +1,64 @@
+# ref https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
+image: bufbuild/buf:1.17.0
+
+pipelines:
+  default:
+    - step:
+        name: Linting
+        caches:
+          - .cache
+        script:
+          - buf format -d --exit-code
+          - buf lint
+
+    - step:
+        name: Generate
+        caches:
+          - .cache
+        script:
+          - buf generate
+        artifacts:
+          - lib
+
+  branches:
+    main:
+      - parallel:  
+        - step:
+            name: Build Java library
+            caches:
+              - gradle
+            script:
+              - cd lib/java
+              - bash ./gradlew build
+            artifacts:
+              - lib/java/build/libs/*.jar
+
+        - step:
+            name: Run Python build
+            script:
+              - cd lib/python
+              - pip install -r requirements.txt
+              - find sanctumlabs -type d -exec touch {}/__init__.py \;
+              - touch sanctumlabs/py.typed
+              - python -m build
+            artifacts:
+              - lib/python/dist/*
+
+      - parallel:
+        - step:
+            name: Package PyPi package
+            script:
+              - pipe: atlassian/bitbucket-upload-file:0.3.4
+                variables:
+                  BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                  BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                  FILENAME: "lib/python/dist/*"
+
+        - step:
+            name: Package Java Package
+            script:
+              - pipe: atlassian/bitbucket-upload-file:0.3.4
+                variables:
+                  BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                  BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                  FILENAME: "lib/java/build/libs/*.jar"
