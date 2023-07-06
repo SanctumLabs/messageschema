@@ -4,5 +4,6 @@ venv
 lib/java/src/
 lib/python/dist/
 lib/python/sanctumlabs/
-lib/python/sanctamlabs_models_py.egg-info/
+lib/python/sanctumlabs_models_py.egg-info
+lib/python/.venv/
 .DS_Store
