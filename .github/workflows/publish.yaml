@@ -20,9 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      - name: Setup
-        run: bin/ci/pypi-setup.sh
 
       - name: Publish
         env:
