@@ -1,7 +1,7 @@
 default: build
 
 clean:
-	rm -rf dist/ sanctumlabs_models_py.egg-info/
+	rm -rf dist/ messagedefs.egg-info/
 
 build: clean
 	pip install -r requirements.txt

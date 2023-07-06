@@ -4,7 +4,7 @@ import os
 version = os.environ.get("CI_COMMIT_TAG", os.environ.get("CI_JOB_ID", "0.1-dev"))
 
 setup(
-    name="sanctumlabs-models-py",
+    name="messagedefs",
     version=version,
     description="Shared data models for Sanctum Labs services",
     author="Brian Lusina",
