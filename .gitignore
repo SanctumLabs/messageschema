@@ -1,6 +1,7 @@
 .idea
 *.iml
 venv
+.venv
 lib/java/src/
 lib/python/dist/
 lib/python/sanctumlabs/
