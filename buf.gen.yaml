@@ -1,14 +1,20 @@
 version: v1
 plugins:
-  - plugin: buf.build/protocolbuffers/python:v23.2
+  - plugin: buf.build/protocolbuffers/python:v23.4
     out: lib/python
     revision: 1
   - plugin: buf.build/community/nipunn1313-mypy:v3.4.0
     out: lib/python
     revision: 1
-  - plugin: buf.build/protocolbuffers/java:v22.3
-    out: lib/java/src/main/java
-    revision: 1
   - plugin: buf.build/bufbuild/validate-java:v1.0.0
-    out: lib/java/src/main/java
+    out: lib/kotlin/src/main/kotlin
+    revision: 1
+  - plugin: buf.build/protocolbuffers/kotlin:v23.4
+    out: lib/kotlin/src/main/kotlin
+    revision: 1
+  - plugin: buf.build/protocolbuffers/js:v3.21.2
+    out: lib/js/sanctumlabs
+    revision: 1
+  - plugin: buf.build/protocolbuffers/go:v1.31.0
+    out: lib/go
     revision: 1
