@@ -7,6 +7,7 @@ import "validate/validate.proto";
 option java_multiple_files = true;
 option java_outer_classname = "LocationProto";
 option java_package = "com.sanctumlabs.common.v1";
+option go_package = "sanctumlabs/libraries/messagedefs/common/v1";
 
 message Location {
   // The latitude in degrees. It must be in the range [-90.0, +90.0].

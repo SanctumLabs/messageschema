@@ -7,6 +7,7 @@ import "validate/validate.proto";
 option java_multiple_files = true;
 option java_outer_classname = "SignupDataProto";
 option java_package = "com.sanctumlabs.events.model.signup.v1";
+option go_package = "sanctumlabs/libraries/messagedefs/events/model/signup/v1";
 
 message Signup {
   string id = 1 [(validate.rules).string.min_len = 1];
