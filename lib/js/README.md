@@ -4,25 +4,25 @@ Message definitions library in JavaScript.
 
 ## Setup
 
-First create a virtual environment. This will require installing [virtualenv](https://virtualenv.pypa.io/). Additionally, you will require [pip](https://pypi.org/project/pip/) installed as well.
+First ensure you have [npm](https://www.npmjs.com/) installed locally or [yarn](https://yarnpkg.com/).
 
 ``` shell
-virtualenv .venv
+npm install
 ```
 
-> This creates a virtual environment in the current directory
-
-Now, you can install the dependencies with:
+Or
 
 ```shell
-pip install -r requirements
+yarn install
 ```
 
-Or with make:
+Or you can execute the above with make:
 
 ```shell
 make install
 ```
+
+> This will install the dependencies defined in the [package.json](./package.json) file in a node_modules directory.
 
 That should be it.
 
