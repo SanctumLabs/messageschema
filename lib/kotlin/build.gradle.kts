@@ -4,10 +4,6 @@ buildscript {
   repositories {
     mavenCentral()
   }
-
-  dependencies {
-    classpath("org.jfrog.buildinfo:build-info-extractor-gradle:latest.release")
-  }
 }
 
 group = "com.sanctumlabs"
@@ -28,7 +24,10 @@ repositories {
 }
 
 dependencies {
+  api("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
+  api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
   api("com.google.protobuf:protobuf-java:3.22.3")
+  api("com.google.protobuf:protobuf-kotlin:3.23.4")
   api("build.buf.protoc-gen-validate:pgv-java-stub:1.0.0")
 }
 

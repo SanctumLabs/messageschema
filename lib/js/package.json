@@ -1,0 +1,25 @@
+{
+  "name": "messagedefs",
+  "version": "0.0.1",
+  "description": "Shared data models for Sanctum Labs Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/sanctumlabs/libraries/messagedefs.git"
+  },
+  "keywords": [
+    "protobuf"
+  ],
+  "author": "Brian Lusina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/sanctumlabs/libraries/messagedefs/issues"
+  },
+  "homepage": "https://gitlab.com/sanctumlabs/libraries/messagedefs#readme",
+  "dependencies": {
+    "google-protobuf": "^3.21.2"
+  }
+}
