@@ -31,7 +31,7 @@ jobs:
   publish-maven:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    name: Publish Java library
+    name: Publish Kotlin library
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -47,6 +47,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: publish
+          build-root-directory: lib/kotlin
         env:
 #          until we have a maven central repository
 #          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
