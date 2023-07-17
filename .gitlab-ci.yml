@@ -22,6 +22,9 @@ lint:
   script:
     - buf format -d --exit-code
     - buf lint
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: "$CI_COMMIT_BRANCH"
 
 breaking:
   stage: build
@@ -42,6 +45,9 @@ generate:
     paths:
       - "lib"
     when: always
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: "$CI_COMMIT_BRANCH"
 
 push-buf-registry:
   stage: publish
