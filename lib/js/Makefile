@@ -43,8 +43,8 @@ build: clean ## build js package
 
 .PHONY: publish-npm
 publish-npm: build ## publish js package to NPM
-	twine upload --verbose -u '__token__' dist/*
+	npm publish
 
 .PHONY: publish-gitlab
 publish-gitlab: build ## publish js package to Gitlab package registry
-	TWINE_PASSWORD=${CI_JOB_TOKEN} TWINE_USERNAME=gitlab-ci-token twine upload --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi dist/*`
+	NPM_TOKEN=${CI_JOB_TOKEN} npm publish
