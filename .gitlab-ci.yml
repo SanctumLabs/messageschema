@@ -65,3 +65,16 @@ publish-python:
     - make publish-gitlab
   only:
     - tags
+
+publish-javascript:
+  stage: publish
+  image: node:20.4.0
+  needs:
+    - push-buf-registry
+  script:
+    - cd lib/js
+    - echo @sanctumlabs:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/>.npmrc
+    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+    - make publish-gitlab
+  only:
+    - tags
