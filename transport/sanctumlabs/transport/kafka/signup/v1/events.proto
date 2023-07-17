@@ -7,10 +7,10 @@ import "sanctumlabs/events/events.proto";
 import "sanctumlabs/events/signup/v1/events.proto";
 import "validate/validate.proto";
 
+option go_package = "sanctumlabs/libraries/messagedefs/transport/kafka/signup/v1";
 option java_multiple_files = true;
 option java_outer_classname = "SignupTopicProto";
 option java_package = "com.sanctumlabs.transport.signup.v1";
-option go_package = "sanctumlabs/libraries/messagedefs/transport/kafka/signup/v1";
 option (sanctumlabs.events.domain) = "signup";
 option (sanctumlabs.events.grouping) = "signup";
 

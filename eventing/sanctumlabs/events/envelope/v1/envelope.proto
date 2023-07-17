@@ -5,10 +5,10 @@ package sanctumlabs.events.envelope.v1;
 import "google/protobuf/timestamp.proto";
 import "validate/validate.proto";
 
+option go_package = "sanctumlabs/libraries/events/envelope/v1";
 option java_multiple_files = true;
 option java_outer_classname = "EnvelopeProto";
 option java_package = "com.sanctumlabs.events.envelope.v1";
-option go_package = "sanctumlabs/libraries/events/envelope/v1";
 
 message StandardMessageFields {
   string message_uuid = 1 [(validate.rules).string.uuid = true];
