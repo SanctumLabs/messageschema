@@ -7,11 +7,11 @@ buildscript {
 }
 
 group = "com.sanctumlabs"
+
 plugins {
   apply(plugin = "java-library")
   apply(plugin = "maven-publish")
 }
-
 
 repositories {
   mavenCentral()
@@ -37,12 +37,26 @@ java {
 
 configure<PublishingExtension> {
   repositories {
+    // Publishes to Github Maven package
     maven {
-      name = "GithubPackages"
+      name = "GithubMavenPackage"
       url = uri("https://maven.pkg.github.com/sanctumlabs/messagedefs")
       credentials {
         username = System.getenv("GH_RELEASE_ACTOR")
         password = System.getenv("GH_PACKAGE_TOKEN")
+      }
+    }
+
+    // Publishes to Gitlab Maven Package
+    maven {
+      name = "GitlabPackageRegistry"
+      url = uri("https://gitlab.com/api/v4/groups/sanctumlabs/-/packages/maven")
+      credentials(HttpHeaderCredentials::class) {
+        name = System.getenv("GITLAB_NAME")
+        value = System.getenv("GITLAB_PRIVATE_TOKEN")
+      }
+      authentication {
+        create("header", HttpHeaderAuthentication::class)
       }
     }
 
