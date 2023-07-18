@@ -21,6 +21,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # The lib artifact is downloaded from the build workflow as it is archived as an artifact there.
+      # since these are 2 different workflows, currently, Github Actions does not allow downloading artifacts
+      # from 2 different workflows. Therefore, this action allows downloading those artifacts to use in a different
+      # workflow
+      # Ref: https://github.com/dawidd6/action-download-artifact
+      - name: Download build artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: ${{ github.event.workflow_run.workflow_id }}          
+          name: lib
+
       - name: Publish
         env:
           TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}      
@@ -47,8 +60,23 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
           # Defaults to the user or organization that owns the workflow file
           scope: '@sanctumlabs'
-        
-      - run: npm ci
+
+      # The lib artifact is downloaded from the build workflow as it is archived as an artifact there.
+      # since these are 2 different workflows, currently, Github Actions does not allow downloading artifacts
+      # from 2 different workflows. Therefore, this action allows downloading those artifacts to use in a different
+      # workflow
+      # Ref: https://github.com/dawidd6/action-download-artifact
+      - name: Download build artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: ${{ github.event.workflow_run.workflow_id }}          
+          name: lib
+
+      - run: |
+          cd lib/js
+          npm ci
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
@@ -75,8 +103,23 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           # Defaults to the user or organization that owns the workflow file
           scope: '@sanctumlabs'
-        
-      - run: npm ci
+
+      # The lib artifact is downloaded from the build workflow as it is archived as an artifact there.
+      # since these are 2 different workflows, currently, Github Actions does not allow downloading artifacts
+      # from 2 different workflows. Therefore, this action allows downloading those artifacts to use in a different
+      # workflow
+      # Ref: https://github.com/dawidd6/action-download-artifact
+      - name: Download build artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: ${{ github.event.workflow_run.workflow_id }}          
+          name: lib
+
+      - run: |
+          cd lib/js
+          npm ci
       - name: Publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}      
@@ -98,6 +141,19 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+
+      # The lib artifact is downloaded from the build workflow as it is archived as an artifact there.
+      # since these are 2 different workflows, currently, Github Actions does not allow downloading artifacts
+      # from 2 different workflows. Therefore, this action allows downloading those artifacts to use in a different
+      # workflow
+      # Ref: https://github.com/dawidd6/action-download-artifact
+      - name: Download build artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: ${{ github.event.workflow_run.workflow_id }}          
+          name: lib
 
       # reference : https://github.com/gradle/gradle-build-action
       - name: Publish Packages
