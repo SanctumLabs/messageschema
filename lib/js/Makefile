@@ -39,7 +39,6 @@ install: ## install Javascript dependencies
 .PHONY: build
 build: clean ## build js package
 	npm install
-	npm build
 
 .PHONY: publish-npm
 publish-npm: build ## publish js package to NPM
