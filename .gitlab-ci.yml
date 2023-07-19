@@ -16,6 +16,7 @@ stages:
   - lint
   - build
   - publish
+  - package
 
 lint:
   stage: lint
@@ -64,10 +65,11 @@ push-buf-registry:
     - tags
 
 publish-python:
-  stage: publish
+  stage: package
   image: python:3.8
   needs:
     - push-buf-registry
+    - generate
   dependencies:
     - generate
   script:
@@ -77,10 +79,11 @@ publish-python:
     - tags
 
 publish-javascript:
-  stage: publish
+  stage: package
   image: node:20.4.0
   needs:
     - push-buf-registry
+    - generate
   dependencies:
     - generate
   script:
@@ -92,10 +95,11 @@ publish-javascript:
     - tags
 
 publish-maven:
-  stage: publish
+  stage: package
   image: gradle:7.4-jdk8
   needs:
     - push-buf-registry
+    - generate
   dependencies:
     - generate
   script:
