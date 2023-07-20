@@ -14,11 +14,7 @@ variables:
   PIPELINE_NAME: 'Message Defs pipeline'
 
 workflow:
-  name: 'Pipeline for branch: $CI_COMMIT_BRANCH'  
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      variables:
-        PIPELINE_NAME: 'MR pipeline: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME'
+  name: 'Pipeline for branch: $CI_COMMIT_BRANCH'
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"
