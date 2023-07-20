@@ -24,6 +24,7 @@ This repository contains the protobuf definitions for platform wide messages.
 
 - We follow [The Official Buf Style Guide](https://buf.build/docs/best-practices/style-guide/).
 - We make use of the [protoc-gen-validate](https://github.com/bufbuild/protoc-gen-validate) plugin for validation rules.
+- More documentation can be found [here](./docs/)
 
 ## Releases
 
