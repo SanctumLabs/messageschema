@@ -1,10 +1,24 @@
+# Ref: https://docs.gitlab.com/ee/ci/yaml
 image:
   name: bufbuild/buf:1.17.0
   entrypoint: [""]
 
+# TODO: include slack notification to notify of running jobs
+# include:
+#   - project: sanctumlabs/tools/gitlab-ci
+#     file: templates/slack-notification.yml
+
 variables:
   BUF_CACHE_DIR: ".cache"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  PIPELINE_NAME: 'Message Defs pipeline'
+
+workflow:
+  name: 'Pipeline for branch: $CI_COMMIT_BRANCH'  
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      variables:
+        PIPELINE_NAME: 'MR pipeline: $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME'
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"
@@ -47,16 +61,34 @@ generate:
     paths:
       - "lib"
     when: always
+    expire_in: 1 week
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: "$CI_COMMIT_BRANCH"
     - if: "$CI_COMMIT_TAG"
 
-push-buf-registry:
+# release the next tag automatically and only on the main branch when manually triggered
+release:
   stage: publish
   needs:
     - generate
+  image: node:12
+  variables:
+    GITLAB_TOKEN: ${CI_JOB_TOKEN}
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
+    - npm install -g semantic-release @semantic-release/gitlab
   script:
+    - npx semantic-release
+  only:
+    - main
+  when: manual
+
+push-buf-registry:
+  stage: publish
+  script:
+    # Generate the libraries, these will be passed on to the next jobs in the pipeline
+    - buf generate
     - echo ${BUF_API_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
     - buf push shared -t "${CI_COMMIT_TAG}"
     - buf push eventing -t "${CI_COMMIT_TAG}"
@@ -69,9 +101,6 @@ publish-python:
   image: python:3.8
   needs:
     - push-buf-registry
-    - generate
-  dependencies:
-    - generate
   script:
     - cd lib/python
     - make publish-gitlab
@@ -83,9 +112,6 @@ publish-javascript:
   image: node:20.4.0
   needs:
     - push-buf-registry
-    - generate
-  dependencies:
-    - generate
   script:
     - cd lib/js
     - echo @sanctumlabs:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/>.npmrc
@@ -99,9 +125,6 @@ publish-maven:
   image: gradle:7.4-jdk8
   needs:
     - push-buf-registry
-    - generate
-  dependencies:
-    - generate
   script:
     - cd lib/kotlin
     - ./gradlew -Pversion="${CI_COMMIT_TAG}" publish
