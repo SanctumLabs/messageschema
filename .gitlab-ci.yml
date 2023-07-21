@@ -1,4 +1,5 @@
 # Ref: https://docs.gitlab.com/ee/ci/yaml
+# Ref: Predefined variables can be found here https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
 image:
   name: bufbuild/buf:1.17.0
   entrypoint: [""]
@@ -70,7 +71,7 @@ release:
     - generate
   image: node:18
   variables:
-    GITLAB_TOKEN: ${CI_JOB_TOKEN}
+    GITLAB_TOKEN: ${GITLAB_ACCESS_TOKEN}
   before_script:
     - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
     - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
