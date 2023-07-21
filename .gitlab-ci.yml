@@ -4,10 +4,9 @@ image:
   name: bufbuild/buf:1.17.0
   entrypoint: [""]
 
-# TODO: include slack notification to notify of running jobs
-# include:
-#   - project: sanctumlabs/tools/gitlab-ci
-#     file: templates/slack-notification.yml
+include:
+  - project: sanctumlabs/tools/gitlab-ci
+    file: templates/slack-notification.yml
 
 variables:
   BUF_CACHE_DIR: ".cache"
@@ -15,7 +14,7 @@ variables:
   PIPELINE_NAME: 'Message Defs pipeline'
 
 workflow:
-  name: 'Pipeline for commit $CI_COMMIT_TITLE with SHA $CI_COMMIT_SHORT_SHA'
+  name: 'Pipeline $CI_COMMIT_TITLE with SHA $CI_COMMIT_SHORT_SHA'
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"
@@ -93,7 +92,7 @@ push-buf-registry:
   only:
     - tags
 
-publish-python:
+publish-pypi:
   stage: package
   image: python:3.8
   needs:
@@ -104,7 +103,7 @@ publish-python:
   only:
     - tags
 
-publish-javascript:
+publish-npm:
   stage: package
   image: node:20.4.0
   needs:
@@ -127,3 +126,29 @@ publish-maven:
     - ./gradlew -Pversion="${CI_COMMIT_TAG}" publish
   only:
     - tags
+
+slack-success:
+  needs:
+    - job: release
+      optional: true
+    - job: push-buf-registry
+      optional: true
+    - job: publish-pypi
+      optional: true
+    - job: publish-npm
+      optional: true
+    - job: publish-maven
+      optional: true
+
+slack-failure:
+  needs:
+    - job: release
+      optional: true
+    - job: push-buf-registry
+      optional: true
+    - job: publish-pypi
+      optional: true
+    - job: publish-npm
+      optional: true
+    - job: publish-maven
+      optional: true
