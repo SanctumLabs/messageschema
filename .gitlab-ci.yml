@@ -68,7 +68,7 @@ release:
   stage: publish
   needs:
     - generate
-  image: node:16
+  image: node:18
   variables:
     GITLAB_TOKEN: ${CI_JOB_TOKEN}
   before_script:
