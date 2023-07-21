@@ -14,7 +14,7 @@ variables:
   PIPELINE_NAME: 'Message Defs pipeline'
 
 workflow:
-  name: 'Pipeline for branch: $CI_COMMIT_BRANCH'
+  name: 'Pipeline for commit $CI_COMMIT_TITLE with SHA $CI_COMMIT_SHORT_SHA'
 
 cache:
   key: "$CI_COMMIT_REF_SLUG"
@@ -73,7 +73,7 @@ release:
     GITLAB_TOKEN: ${CI_JOB_TOKEN}
   before_script:
     - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
-    - npm install -g semantic-release @semantic-release/gitlab
+    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
   script:
     - semantic-release
   only:
