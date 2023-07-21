@@ -68,7 +68,7 @@ release:
   stage: publish
   needs:
     - generate
-  image: node:12-buster-slim
+  image: node:16
   variables:
     GITLAB_TOKEN: ${CI_JOB_TOKEN}
   before_script:
