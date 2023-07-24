@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package sanctumlabs.events.notifications.sms.v1;
+
+import "sanctumlabs/events/events.proto";
+import "sanctumlabs/events/notifications/sms/v1/data.proto";
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messagedefs/events/model/notifications/sms/v1";
+option java_multiple_files = true;
+option java_outer_classname = "SmsEventsProto";
+option java_package = "com.sanctumlabs.events.model.notifications.sms.v1";
+option (sanctumlabs.events.domain) = "notifications";
+option (sanctumlabs.events.grouping) = "notifications";
+
+// SmsReceived is an event that is emitted when the system receives an SMS to send
+message SmsReceived {
+  option (sanctumlabs.events.event_type) = "sms_received";
+
+  sanctumlabs.events.notifications.sms.v1.Sms sms = 1 [(validate.rules).message.required = true];
+}
+
+// SmsSubmitted is an event that is emitted when submitting an SMS to a 3rd Party system to handle sending SMSes
+message SmsSubmitted {
+  option (sanctumlabs.events.event_type) = "sms_submitted";
+
+  sanctumlabs.events.notifications.sms.v1.Sms sms = 1 [(validate.rules).message.required = true];
+}
+
+// SmsSent is an event that is emitted when the system successfully sends out an SMS with a 3rd party system
+message SmsSent {
+  option (sanctumlabs.events.event_type) = "sms_sent";
+
+  sanctumlabs.events.notifications.sms.v1.Sms sms = 1 [(validate.rules).message.required = true];
+}
+
+// SmsCallbackReceived is an event that is emitted when the system receives an SMS callback from a 3rd party system
+message SmsCallbackReceived {
+  option (sanctumlabs.events.event_type) = "sms_callback_received";
+
+  sanctumlabs.events.notifications.sms.v1.SmsCallback sms_callback = 1 [(validate.rules).message.required = true];
+}
