@@ -23,11 +23,11 @@ message SmsV1 {
     option (validate.required) = true;
 
     sanctumlabs.events.notifications.sms.v1.SmsReceived sms_received = 2;
-    
+
     sanctumlabs.events.notifications.sms.v1.SmsSubmitted sms_submitted = 3;
-    
+
     sanctumlabs.events.notifications.sms.v1.SmsSent sms_sent = 4;
-    
+
     sanctumlabs.events.notifications.sms.v1.SmsCallbackReceived sms_callback_received = 5;
   }
 }
