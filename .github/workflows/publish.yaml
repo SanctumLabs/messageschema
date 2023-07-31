@@ -2,9 +2,11 @@ name: Publish
 
 on:
   push:
+    branches:
+      - main
     tags:
       # reference: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#patterns-to-match-branches-and-tags    
-      - '**' # Push events to every tag including hierarchical tags like v1.0/beta
+      - '*' # Push events to every tag including hierarchical tags like v1.0/beta
   # TODO: set this to also run on as there will be instances where a merge request triggers this workflow to run when the Build workflow is 
   # completed, as a result, it would be useful to set this to run as well
   # workflow_run:
