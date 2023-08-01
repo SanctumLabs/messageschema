@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package sanctumlabs.messageschema.transport.kafka.notifications.sms.v1;
+
+import "sanctumlabs/messageschema/events/envelope/v1/envelope.proto";
+import "sanctumlabs/messageschema/events/notifications/sms/v1/events.proto";
+import "sanctumlabs/messageschema/events/v1/events.proto";
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messageschema/transport/kafka/notifications/sms/v1";
+option java_multiple_files = true;
+option java_outer_classname = "SmsTopicProto";
+option java_package = "com.sanctumlabs.messageschema.transport.kafka.notifications.sms.v1";
+option (sanctumlabs.messageschema.events.v1.domain) = "notifications";
+option (sanctumlabs.messageschema.events.v1.grouping) = "notifications";
+
+message SmsV1 {
+  option (sanctumlabs.messageschema.events.v1.event_type) = "sms_v1";
+
+  sanctumlabs.messageschema.events.envelope.v1.EventFields event_fields = 1 [(validate.rules).message.required = true];
+
+  oneof payload {
+    option (validate.required) = true;
+
+    sanctumlabs.messageschema.events.notifications.sms.v1.SmsReceived sms_received = 2;
+
+    sanctumlabs.messageschema.events.notifications.sms.v1.SmsSubmitted sms_submitted = 3;
+
+    sanctumlabs.messageschema.events.notifications.sms.v1.SmsSent sms_sent = 4;
+
+    sanctumlabs.messageschema.events.notifications.sms.v1.SmsCallbackReceived sms_callback_received = 5;
+  }
+}

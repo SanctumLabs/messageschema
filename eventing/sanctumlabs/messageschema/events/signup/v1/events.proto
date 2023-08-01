@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package sanctumlabs.messageschema.events.signup.v1;
+
+import "sanctumlabs/messageschema/events/signup/v1/data.proto";
+import "sanctumlabs/messageschema/events/v1/events.proto";
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messageschema/events/model/signup/v1";
+option java_multiple_files = true;
+option java_outer_classname = "SignupEventsProto";
+option java_package = "com.sanctumlabs.messageschema.events.model.signup.v1";
+option (sanctumlabs.messageschema.events.v1.domain) = "signup";
+option (sanctumlabs.messageschema.events.v1.grouping) = "signup";
+
+message SignupStarted {
+  option (sanctumlabs.messageschema.events.v1.event_type) = "signup_started";
+
+  sanctumlabs.messageschema.events.signup.v1.Signup signup = 1 [(validate.rules).message.required = true];
+}

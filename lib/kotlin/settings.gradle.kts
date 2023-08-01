@@ -1,1 +1,1 @@
-rootProject.name = "messagedefs"
+rootProject.name = "messageschema"

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package sanctumlabs.messageschema.common.v1;
+
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messageschema/common/v1";
+option java_multiple_files = true;
+option java_outer_classname = "MoneyProto";
+option java_package = "com.sanctumlabs.messageschema.common.v1";
+
+enum Currency {
+  CURRENCY_UNSPECIFIED = 0;
+  ZAR = 1;
+  MUR = 2;
+  USD = 3;
+  EUR = 4;
+  GBP = 5;
+  RWF = 6;
+  EGP = 7;
+}
+
+message Money {
+  int64 cents = 1;
+
+  Currency currency = 2 [(validate.rules).enum = {
+    not_in: [0],
+    defined_only: true
+  }];
+}

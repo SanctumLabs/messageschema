@@ -30,7 +30,7 @@ default: build
 
 .PHONY: clean
 clean: ## removes packaged python library
-	rm -rf dist/ messagedefs.egg-info/
+	rm -rf dist/ messageschema.egg-info/
 
 .PHONY: install
 install: ## install Python dependencies

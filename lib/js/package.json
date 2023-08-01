@@ -1,5 +1,5 @@
 {
-  "name": "@sanctumlabs/messagedefs",
+  "name": "@sanctumlabs/messageschema",
   "version": "0.0.1",
   "description": "Shared data models for Sanctum Labs Platform",
   "scripts": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/sanctumlabs/libraries/messagedefs.git"
+    "url": "git+https://gitlab.com/sanctumlabs/libraries/messageschema.git"
   },
   "keywords": [
     "protobuf",
@@ -17,9 +17,9 @@
   "author": "Brian Lusina",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/sanctumlabs/libraries/messagedefs/issues"
+    "url": "https://gitlab.com/sanctumlabs/libraries/messageschema/issues"
   },
-  "homepage": "https://gitlab.com/sanctumlabs/libraries/messagedefs#readme",
+  "homepage": "https://gitlab.com/sanctumlabs/libraries/messageschema#readme",
   "dependencies": {
     "google-protobuf": "^3.21.2"
   }

@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package sanctumlabs.messageschema.events.notifications.sms.v1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messageschema/events/model/notifications/sms/v1";
+option java_multiple_files = true;
+option java_outer_classname = "SmsDataProto";
+option java_package = "com.sanctumlabs.messageschema.events.model.notifications.sms.v1";
+
+// Sms is is the sms message to deliver
+message Sms {
+  string id = 1 [(validate.rules).string.min_len = 1];
+
+  // sender is the sender of the message. This is optional
+  optional string sender = 2;
+
+  // recipient is the recipient of the message. this is required
+  string recipient = 3;
+
+  // message is the sms message to send out
+  string message = 4;
+}
+
+// SmsCallback is is the sms callback received from 3rd party system regarding the state of an initially sent SMS
+message SmsCallback {
+  // account_sid is the unique Account SID that
+  string account_sid = 1;
+
+  // sender is the sender of the message. This is optional
+  optional string sender = 2;
+
+  // message_sid is SID of the message
+  string message_sid = 3;
+
+  // message_status is is the status of the message
+  SmsStatus message_status = 4 [(validate.rules).enum = {
+    not_in: [0],
+    defined_only: true
+  }];
+
+  // sms_id is the ID of the sms unique in the system
+  string sms_id = 5;
+
+  // sms_status is the status of the sms
+  SmsStatus sms_status = 6 [(validate.rules).enum = {
+    not_in: [0],
+    defined_only: true
+  }];
+}
+
+// SmsResponse is the response received from 3rd party sms provider once an sms is sent
+message SmsResponse {
+  string id = 1 [(validate.rules).string.min_len = 1];
+
+  // account_sid is the unique Account SID that
+  string account_sid = 2;
+
+  // sid
+  string sid = 3;
+
+  // sms_date is the date for the SMS
+  SmsDate sms_date = 4;
+
+  // sms_type is the type of the SMS being delivered
+  SmsType sms_type = 5 [(validate.rules).enum = {
+    in: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    defined_only: true
+  }];
+
+  // num_media is the number of media files in the SMS
+  int64 num_media = 6;
+
+  // num_segments is the number of segments the SMS was sent in
+  int64 num_segments = 7;
+
+  // price is the price it cost to send out the SMS
+  SmsPrice price = 8;
+
+  // status is the status of the SMS that was sent
+  SmsStatus status = 9 [(validate.rules).enum = {
+    not_in: [0],
+    defined_only: true
+  }];
+
+  // subresource_uris is a mapping of the URI to a sub resource of the SMS
+  map<string, google.protobuf.Any> subresource_uris = 10;
+
+  // uri is an accessible URI on the 3rd Party SMS
+  string uri = 11;
+
+  // sms_id is the ID of the sms unique in the system
+  string sms_id = 12;
+
+  // messaging_service_sid is the message service ID on the 3rd party
+  optional string messaging_service_sid = 13;
+
+  // error code is the error code
+  optional string error_code = 14;
+
+  // error_message is the message of the error
+  optional string error_message = 15;
+}
+
+// SmsDate contains the date fields for sending out an SMS
+message SmsDate {
+  google.protobuf.Timestamp date_created = 1;
+  google.protobuf.Timestamp date_sent = 2;
+  google.protobuf.Timestamp date_updated = 3;
+}
+
+// SmsPrice is the price of the SMS
+message SmsPrice {
+  optional float price = 1;
+  optional string currency = 2;
+}
+
+enum SmsType {
+  SMS_TYPE_UNSPECIFIED = 0;
+  OUTBOUND = 1;
+  INBOUND = 2;
+  OUTBOUND_API = 3;
+  OUTBOUND_REPLY = 4;
+  UNKNOWN = 5;
+}
+
+// SmsStatus is the status of the SMS
+enum SmsStatus {
+  SMS_STATUS_UNSPECIFIED = 0;
+  ACCEPTED = 1;
+  SCHEDULED = 2;
+  CANCELED = 3;
+  QUEUED = 4;
+  SENDING = 5;
+  SENT = 6;
+  FAILED = 7;
+  DELIVERED = 8;
+  UNDELIVERED = 9;
+  RECEIVING = 10;
+  READ = 11;
+  PENDING = 12;
+}

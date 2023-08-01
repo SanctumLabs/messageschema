@@ -40,7 +40,7 @@ configure<PublishingExtension> {
     // Publishes to Github Maven package
     maven {
       name = "GithubMavenPackage"
-      url = uri("https://maven.pkg.github.com/sanctumlabs/messagedefs")
+      url = uri("https://maven.pkg.github.com/sanctumlabs/messageschema")
       credentials {
         username = System.getenv("GH_RELEASE_ACTOR")
         password = System.getenv("GH_PACKAGE_TOKEN")
