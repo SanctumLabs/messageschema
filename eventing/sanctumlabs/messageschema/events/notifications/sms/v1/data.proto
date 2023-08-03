@@ -23,6 +23,12 @@ message Sms {
 
   // message is the sms message to send out
   string message = 4;
+
+  // status is the status of the sms. This is set to optional
+  optional SmsStatus status = 5 [(validate.rules).enum = {
+    not_in: [0],
+    defined_only: true
+  }];
 }
 
 // SmsCallback is is the sms callback received from 3rd party system regarding the state of an initially sent SMS
