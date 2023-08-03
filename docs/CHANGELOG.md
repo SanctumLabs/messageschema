@@ -1,3 +1,10 @@
+# [0.2.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.1.0...0.2.0) (2023-08-03)
+
+
+### Features
+
+* **events:** sms status field ([d2d8c17](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/d2d8c170fbbd1d9c710aacaf6cbc0b352d44cbc9))
+
 # [0.1.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.0.3...0.1.0) (2023-07-27)
 
 
