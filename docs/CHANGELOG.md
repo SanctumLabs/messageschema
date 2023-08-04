@@ -1,3 +1,10 @@
+# [0.3.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.2.0...0.3.0) (2023-08-04)
+
+
+### Features
+
+* **buf:** update repositories ([77ec95e](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/77ec95e1479802cd351c0cdf79337ed883635536))
+
 # [0.2.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.1.0...0.2.0) (2023-08-03)
 
 
