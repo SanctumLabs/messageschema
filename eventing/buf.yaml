@@ -1,7 +1,7 @@
 version: v1
-name: buf.build/sanctumlab/eventing
+name: buf.build/sanctumlabs/eventing
 deps:
-  - buf.build/sanctumlab/shared
+  - buf.build/sanctumlabs/shared
 breaking:
   use:
     - FILE

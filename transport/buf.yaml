@@ -1,7 +1,7 @@
 version: v1
-name: buf.build/sanctumlab/transport
+name: buf.build/sanctumlabs/transport
 deps:
-  - buf.build/sanctumlab/eventing
+  - buf.build/sanctumlabs/eventing
 breaking:
   use:
     - FILE
