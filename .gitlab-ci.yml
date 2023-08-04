@@ -27,6 +27,7 @@ stages:
   - build
   - publish
   - package
+  - release
 
 lint:
   stage: lint
@@ -63,8 +64,8 @@ generate:
     - if: "$CI_COMMIT_BRANCH"
     - if: "$CI_COMMIT_TAG"
 
-# release the next tag automatically and only on the main branch when manually triggered
-release:
+# publish the next tag automatically and only on the main branch when manually triggered
+publish-tag:
   stage: publish
   needs:
     - generate
@@ -79,6 +80,17 @@ release:
   only:
     - main
   when: manual
+
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "running release_job"
+  release:
+    tag_name: '$CI_COMMIT_TAG'
+    description: '$CI_COMMIT_TAG'
 
 push-buf-registry:
   stage: publish

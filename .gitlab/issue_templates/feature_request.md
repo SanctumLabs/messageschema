@@ -1,22 +1,14 @@
-# Describe the bug
+# Describe the Feature
 
-A clear and concise description of what the bug is.
+A clear and concise description of what the feature is.
 
-## To Reproduce
+## Detailed description of steps
 
-Steps to reproduce the behavior:
+Steps to possibly create the behavior:
 
-1. Go to '...'
-2. Click on '....'
-3. See error
-
-## Expected behavior
+## Expected behaviour
 
 A clear and concise description of what you expected to happen.
-
-## Screenshots
-
-If applicable, add screenshots to help explain your problem.
 
 ## Additional context
 
