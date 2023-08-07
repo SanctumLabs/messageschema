@@ -30,7 +30,7 @@ default: build
 
 .PHONY: clean
 clean: ## removes packaged python library
-	rm -rf dist/ messageschema.egg-info/
+	rm -rf dist/ sanctumlabs_messageschema.egg-info/
 
 .PHONY: install
 install: ## install Python dependencies
