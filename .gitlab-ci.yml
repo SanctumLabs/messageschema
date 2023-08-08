@@ -141,7 +141,9 @@ publish-maven:
 
 slack-success:
   needs:
-    - job: release
+    - job: publish-tag
+      optional: true
+    - job: release_job
       optional: true
     - job: push-buf-registry
       optional: true
@@ -154,7 +156,9 @@ slack-success:
 
 slack-failure:
   needs:
-    - job: release
+    - job: publish-tag
+      optional: true
+    - job: release_job
       optional: true
     - job: push-buf-registry
       optional: true
