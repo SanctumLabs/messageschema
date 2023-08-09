@@ -1,7 +1,8 @@
 version: v1
-name: buf.build/sanctumlabs/eventing
+name: buf.build/sanctumlabs/events
 deps:
   - buf.build/sanctumlabs/shared
+  - buf.build/envoyproxy/protoc-gen-validate
 breaking:
   use:
     - FILE
