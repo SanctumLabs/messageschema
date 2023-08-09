@@ -135,7 +135,7 @@ publish-maven:
     - push-buf-registry
   script:
     - cd lib/kotlin
-    - ./gradlew -Pversion="${CI_COMMIT_TAG}" publish
+    - ./gradlew -Pversion="${CI_COMMIT_TAG}" -PgitlabGroupID="${CI_PROJECT_ID}" -PgitLabPrivateToken=${CI_PROJECT_ID} -PgitLabTokenName=gitlab-ci-token publishGitlabPublicationToGitlabRepository
   only:
     - tags
 
