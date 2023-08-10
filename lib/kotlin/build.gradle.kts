@@ -1,5 +1,11 @@
 import java.net.URI
 
+val gitlabGroupID: String by project
+val gitlabProjectID: String by project
+val gitLabTokenName: String by project
+val gitLabPrivateToken: String by project
+val version: String by project
+
 buildscript {
   repositories {
     mavenCentral()
@@ -9,8 +15,10 @@ buildscript {
 group = "com.sanctumlabs"
 
 plugins {
-  apply(plugin = "java-library")
-  apply(plugin = "maven-publish")
+  java
+  `maven-publish`
+  `java-library`
+  signing
 }
 
 repositories {
@@ -20,6 +28,18 @@ repositories {
   maven {
     url = uri("https://jitpack.io")
     url = URI.create("https://plugins.gradle.org/m2/")
+  }
+
+  maven {
+    name = "GitLab"
+    url = uri("https://gitlab.com/api/v4/groups/${gitlabGroupID}/-/packages/maven")
+    credentials(HttpHeaderCredentials::class) {
+      name = System.getProperty("GITLAB_TOKEN_NAME", gitLabTokenName)
+      value = System.getProperty("GITLAB_PRIVATE_TOKEN", gitLabPrivateToken)
+    }
+    authentication {
+      create<HttpHeaderAuthentication>("header")
+    }
   }
 }
 
@@ -32,14 +52,39 @@ dependencies {
 }
 
 java {
+  withJavadocJar()
   withSourcesJar()
 }
 
-configure<PublishingExtension> {
+publishing {
+
+  publications {
+    create<MavenPublication>("library") {
+      from(components["java"])
+      pom {
+        name.set("Messageschema Library")
+        description.set("Message schema library containing message schemas for platform wide messages")
+        // TODO: update library website page
+        url.set("https://github.com/SanctumLabs/messageschema")
+        licenses {
+          license {
+            name.set("The Apache License, Version 2.0")
+            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+          }
+        }
+        developers {
+          developer {
+            name.set("SanctumLabs")
+            email.set("sanctumlabs@gmail.com")
+          }
+        }
+      }
+    }
+  }
+
   repositories {
-    // Publishes to Github Maven package
     maven {
-      name = "GithubMavenPackage"
+      name = "Github"
       url = uri("https://maven.pkg.github.com/sanctumlabs/messageschema")
       credentials {
         username = System.getenv("GH_RELEASE_ACTOR")
@@ -47,13 +92,12 @@ configure<PublishingExtension> {
       }
     }
 
-    // Publishes to Gitlab Maven Package
     maven {
-      name = "GitlabPackageRegistry"
-      url = uri("https://gitlab.com/api/v4/groups/sanctumlabs/-/packages/maven")
+      name = "GitLab"
+      url = uri("https://gitlab.com/api/v4/projects/${gitlabProjectID}/packages/maven")
       credentials(HttpHeaderCredentials::class) {
-        name = System.getenv("GITLAB_NAME")
-        value = System.getenv("GITLAB_PRIVATE_TOKEN")
+        name = System.getProperty("GITLAB_TOKEN_NAME", gitLabTokenName)
+        value = System.getProperty("GITLAB_PRIVATE_TOKEN", gitLabPrivateToken)
       }
       authentication {
         create("header", HttpHeaderAuthentication::class)
@@ -70,10 +114,16 @@ configure<PublishingExtension> {
 //            }
 //        }
   }
+}
 
-  publications {
-    register<MavenPublication>("gpr") {
-      from(components["java"])
+signing {
+  sign(publishing.publications["library"])
+}
+
+tasks {
+  javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+      (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
     }
   }
 }
