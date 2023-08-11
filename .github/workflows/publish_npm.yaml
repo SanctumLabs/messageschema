@@ -1,0 +1,83 @@
+name: Publish NPM
+
+on:
+  push:
+    tags:
+      # reference: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#patterns-to-match-branches-and-tags    
+      - '*' # Push events to every tag including hierarchical tags like v1.0/beta
+
+permissions:
+  contents: write # to be able to publish a GitHub release
+  issues: write # to be able to comment on released issues
+  pull-requests: write # to be able to comment on released pull requests
+  id-token: write # to enable use of OIDC for npm provenance
+
+jobs:
+  buf-build:
+    uses: ./.github/workflows/buf_build.yaml
+
+  publish-npm-github:
+    runs-on: ubuntu-latest
+    name: Publish Github NPM package
+    needs: buf-build
+    permissions: write-all
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download lib artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: lib
+
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@sanctumlabs'
+
+      - run: |
+          cd lib/js
+          npm ci
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
+        run: |
+          cd lib/js
+          npm publish --tag ${{ github.ref_name }}
+
+  publish-npm-registry:
+    runs-on: ubuntu-latest
+    needs: buf-build
+    name: Publish NPM package
+    permissions: write-all
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Download lib artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: lib
+
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@sanctumlabs'
+
+      - run: |
+          cd lib/js
+          npm ci
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}      
+        run: |
+          cd lib/js
+          npm publish --tag ${{ github.ref_name }}
