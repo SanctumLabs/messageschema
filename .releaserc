@@ -22,6 +22,13 @@
               "assets": ["docs/CHANGELOG.md"],
               "message": "chore(release): releasing ${nextRelease.version} \n\n${nextRelease.notes}"
             }
+        ],
+        [
+            "@semantic-release/npm",
+            {
+                "npmPublish": false,
+                "pkgRoot": "./lib/js"
+            }
         ]
     ]
 }
