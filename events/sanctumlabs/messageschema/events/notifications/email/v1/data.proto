@@ -18,7 +18,7 @@ message Email {
 
   // to is the recipient of the message. this is required
   repeated string to = 3;
-  
+
   // cc is the list of carbon copy recipients of this email. This could be an empty list
   repeated string cc = 4;
 
@@ -44,10 +44,10 @@ message Email {
 // EmailAttachment represents an attachment in an email message
 message EmailAttachment {
   // content of the attachment
-  string content = 1 [(validate.rules).string.min_len = 1];;
+  string content = 1 [(validate.rules).string.min_len = 1];
 
   // filename of the attachment
-  string filename = 2 [(validate.rules).string.min_len = 1];;
+  string filename = 2 [(validate.rules).string.min_len = 1];
 
   // mimetype of the attachment
   string mimetype = 3;
