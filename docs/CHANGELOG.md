@@ -1,3 +1,10 @@
+# [0.4.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.3.0...0.4.0) (2023-08-11)
+
+
+### Features
+
+* **events:** email data ([7708d6d](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/7708d6d3f61437131b825d06f374e18f93bbd306))
+
 # [0.3.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.2.0...0.3.0) (2023-08-04)
 
 
