@@ -5,13 +5,13 @@ image:
   entrypoint: [""]
 
 include:
-  - project: sanctumlabs/tools/gitlab-ci
-    file: templates/slack-notification.yml
+  - project: sanctumlabs/tools/ci-workflows
+    file: .gitlab/templates/slack-notification.yml
 
 variables:
   BUF_CACHE_DIR: ".cache"
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-  PIPELINE_NAME: 'Message Defs pipeline'
+  PIPELINE_NAME: 'Message Schema pipeline'
 
 workflow:
   name: 'Pipeline $CI_COMMIT_TITLE with SHA $CI_COMMIT_SHORT_SHA'
@@ -124,7 +124,8 @@ publish-npm:
     - cd lib/js
     - echo @sanctumlabs:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/>.npmrc
     - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
-    - NPM_TOKEN=${CI_JOB_TOKEN} npm publish --tag ${CI_COMMIT_TAG}
+    - npm version ${CI_COMMIT_TAG}
+    - NPM_TOKEN=${CI_JOB_TOKEN} npm publish
   only:
     - tags
 

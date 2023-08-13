@@ -13,23 +13,4 @@ on:
 
 jobs:
   build:
-    name: Buf generate
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Buf Setup
-        uses: bufbuild/buf-setup-action@v1
-
-      - name: Generate
-        run: buf generate
-      
-      - name: Archive artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: lib
-          path: |
-            lib
-          retention-days: 7
+    uses: ./.github/workflows/buf_build.yaml
