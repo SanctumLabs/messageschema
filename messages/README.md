@@ -1,4 +1,4 @@
-# Transport
+# Messages
 
 Defines the message schemas for different types of message transports.
 

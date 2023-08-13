@@ -9,8 +9,8 @@ deps:
   - remote: buf.build
     owner: sanctumlabs
     repository: events
-    commit: 7d2cf27d20bc40528b9749a3eb7ae0de
-    digest: shake256:ba3c924cfd981e46204f77585e025495eedfc7c98ee609a457fda760a5117eab1d021f8da29cdc2b3113797abf857caaa94eb46b434345bb0179b745c8174ded
+    commit: dd1c7b46720e4354bc55c44eadddd263
+    digest: shake256:58685c7ab141f5edfb514ad717526bed78488f23901a17597c3a49a5bf695813b4601eceddfc42e3e7d10e0937bb3bbfd2ee728fe5f9f253f6a5ffbe39621d04
   - remote: buf.build
     owner: sanctumlabs
     repository: shared

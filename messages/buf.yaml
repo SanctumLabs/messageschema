@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/sanctumlabs/transport
+name: buf.build/sanctumlabs/messages
 deps:
   - buf.build/sanctumlabs/events
 breaking:
