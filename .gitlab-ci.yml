@@ -100,7 +100,7 @@ push-buf-registry:
     - echo ${BUF_API_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
     - buf push shared -t "${CI_COMMIT_TAG}"
     - buf push events -t "${CI_COMMIT_TAG}"
-    - buf push transport -t "${CI_COMMIT_TAG}"
+    - buf push messages -t "${CI_COMMIT_TAG}"
   only:
     - tags
 
