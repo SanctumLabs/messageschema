@@ -1,3 +1,10 @@
+# [0.5.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.4.0...0.5.0) (2023-08-14)
+
+
+### Features
+
+* **messages:** messages lib ([5e9e844](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/5e9e8444f88490169476432779ce9f31db31ff44))
+
 # [0.4.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.3.0...0.4.0) (2023-08-11)
 
 
