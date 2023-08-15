@@ -7,18 +7,16 @@ on:
       - "Build"
       - "Publish"
       - "Release"
-      - "Gitlab Sync"
-      - "BitBucket Sync"
     types:
       - completed
 
 jobs:
   onSuccess:
-    uses: SanctumLabs/ci-workflows/.github/workflows/slack_notification.yml
+    uses: SanctumLabs/ci-workflows/.github/workflows/slack_notification.yml@main
     secrets:
       slack_webhook: ${{ secrets.PIPELINES_SLACK_WEBHOOK }}
 
   onFailure:
-    uses: SanctumLabs/ci-workflows/.github/workflows/slack_notification.yml
+    uses: SanctumLabs/ci-workflows/.github/workflows/slack_notification.yml@main
     secrets:
       slack_webhook: ${{ secrets.PIPELINES_SLACK_WEBHOOK }}
