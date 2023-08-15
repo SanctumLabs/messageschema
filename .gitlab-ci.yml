@@ -25,24 +25,25 @@ cache:
 stages:
   - lint
   - build
-  - publish
+  - test
   - package
+  - tag
   - release
 
-lint:
+lint-format:
   stage: lint
   script:
-    - buf format -d --exit-code
     - buf lint
+    - buf format -d --exit-code
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     - if: "$CI_COMMIT_BRANCH"
     - if: "$CI_COMMIT_TAG"
 
 breaking:
-  stage: build
+  stage: test
   needs:
-    - lint
+    - lint-format
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
@@ -51,7 +52,7 @@ breaking:
 generate:
   stage: build
   needs:
-    - lint
+    - lint-format
   script:
     - buf generate
   artifacts:
@@ -64,36 +65,8 @@ generate:
     - if: "$CI_COMMIT_BRANCH"
     - if: "$CI_COMMIT_TAG"
 
-# publish the next tag automatically and only on the main branch when manually triggered
-publish-tag:
-  stage: publish
-  needs:
-    - generate
-  image: node:18
-  variables:
-    GITLAB_TOKEN: ${GITLAB_ACCESS_TOKEN}
-  before_script:
-    - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
-    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
-  script:
-    - semantic-release
-  only:
-    - main
-  when: manual
-
-release_job:
-  stage: release
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  rules:
-    - if: $CI_COMMIT_TAG
-  script:
-    - echo "running release_job"
-  release:
-    tag_name: '$CI_COMMIT_TAG'
-    description: '$CI_COMMIT_TAG'
-
 push-buf-registry:
-  stage: publish
+  stage: package
   script:
     # Generate the libraries, these will be passed on to the next jobs in the pipeline
     - buf generate
@@ -140,6 +113,34 @@ publish-maven:
     - ./gradlew -Pversion="${CI_COMMIT_TAG}" -PgitlabProjectID="${CI_PROJECT_ID}" -PgitLabPrivateToken=${CI_PROJECT_ID} -PgitLabTokenName=Job-Token publishLibraryPublicationToGitlabRepository
   only:
     - tags
+
+# publish the next tag automatically and only on the main branch when manually triggered
+publish-tag:
+  stage: tag
+  needs:
+    - generate
+  image: node:18
+  variables:
+    GITLAB_TOKEN: ${GITLAB_ACCESS_TOKEN}
+  before_script:
+    - apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
+    - npm install -g semantic-release @semantic-release/gitlab @semantic-release/changelog @semantic-release/git
+  script:
+    - semantic-release
+  only:
+    - main
+  when: manual
+
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG
+  script:
+    - echo "running release_job"
+  release:
+    tag_name: '$CI_COMMIT_TAG'
+    description: '$CI_COMMIT_TAG'
 
 slack-success:
   needs:
