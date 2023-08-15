@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package sanctumlabs.messageschema.events.notifications.email.v1;
+
+import "sanctumlabs/messageschema/events/notifications/email/v1/data.proto";
+import "sanctumlabs/messageschema/events/v1/events.proto";
+import "validate/validate.proto";
+
+option go_package = "sanctumlabs/libraries/messageschema/events/model/notifications/email/v1";
+option java_multiple_files = true;
+option java_outer_classname = "EmailEventsProto";
+option java_package = "com.sanctumlabs.messageschema.events.model.notifications.email.v1";
+option (sanctumlabs.messageschema.events.v1.domain) = "notifications";
+option (sanctumlabs.messageschema.events.v1.grouping) = "notifications";
+
+// EmailReceived is an event that is emitted when the system receives an Email to send
+message EmailReceived {
+  option (sanctumlabs.messageschema.events.v1.event_type) = "email_received";
+
+  sanctumlabs.messageschema.events.notifications.email.v1.Email email = 1 [(validate.rules).message.required = true];
+}
+
+// EmailSubmitted is an event that is emitted when submitting an Email to a 3rd Party system to handle sending emails
+message EmailSubmitted {
+  option (sanctumlabs.messageschema.events.v1.event_type) = "email_submitted";
+
+  sanctumlabs.messageschema.events.notifications.email.v1.Email email = 1 [(validate.rules).message.required = true];
+}
+
+// EmailSent is an event that is emitted when the system successfully sends out an email with a 3rd party system
+message EmailSent {
+  option (sanctumlabs.messageschema.events.v1.event_type) = "email_sent";
+
+  sanctumlabs.messageschema.events.notifications.email.v1.Email email = 1 [(validate.rules).message.required = true];
+}
