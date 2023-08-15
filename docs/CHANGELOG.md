@@ -1,3 +1,10 @@
+## [0.6.1](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.6.0...0.6.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* **buf:** update lock files ([d5c575b](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/d5c575ba00d8b91411ed457c8d041ecb5d52bb50))
+
 # [0.6.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.5.0...0.6.0) (2023-08-15)
 
 
