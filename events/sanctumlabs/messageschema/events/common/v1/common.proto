@@ -22,3 +22,21 @@ message Failure {
 
   optional string category = 3;
 }
+
+// Basic User details
+message BasicUserDetails {
+  // First name of the user
+  optional string first_name = 1;
+
+  // Middle name of the user
+  optional string middle_name = 2;
+
+  // Last name of the user
+  optional string last_name = 3;
+
+  // Email of the user.
+  optional string email = 4;
+
+  // User mobile number
+  optional string mobile_number = 5;
+}
