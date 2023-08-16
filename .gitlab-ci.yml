@@ -71,12 +71,15 @@ push-buf-registry:
     - echo ${BUF_API_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
     - cd shared
     - buf mod update
+    - cd ..
     - buf push shared -t "${CI_COMMIT_TAG}"
     - cd .. && cd events
     - buf mod update
+    - cd ..
     - buf push events -t "${CI_COMMIT_TAG}"
     - cd .. && cd messages
     - buf mod update
+    - cd ..
     - buf push messages -t "${CI_COMMIT_TAG}"
     # Generate the libraries, these will be passed on to the next jobs in the pipeline
     - buf generate
@@ -88,6 +91,9 @@ publish-pypi:
   image: python:3.8
   needs:
     - push-buf-registry
+  before_script:
+    - ./bin/ci/buf-setup.sh
+    - buf generate
   script:
     - cd lib/python
     - make publish-gitlab
@@ -99,6 +105,9 @@ publish-npm:
   image: node:20.4.0
   needs:
     - push-buf-registry
+  before_script:
+    - ./bin/ci/buf-setup.sh
+    - buf generate
   script:
     - cd lib/js
     - echo @sanctumlabs:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/ > .npmrc
@@ -113,6 +122,9 @@ publish-maven:
   image: gradle:7.4-jdk8
   needs:
     - push-buf-registry
+  before_script:
+    - ./bin/ci/buf-setup.sh
+    - buf generate
   script:
     - cd lib/kotlin
     - ./gradlew -Pversion="${CI_COMMIT_TAG}" build 
