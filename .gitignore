@@ -13,3 +13,4 @@ lib/js/node_modules
 node_modules/
 *.egg-info
 .DS_Store
+!bin
