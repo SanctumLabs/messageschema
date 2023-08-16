@@ -1,3 +1,10 @@
+# [0.7.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.6.1...0.7.0) (2023-08-16)
+
+
+### Features
+
+* **events:** add basic user details ([44f9a6d](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/44f9a6d9ae10c490612a5d2572299f84ea18241f))
+
 ## [0.6.1](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.6.0...0.6.1) (2023-08-15)
 
 
