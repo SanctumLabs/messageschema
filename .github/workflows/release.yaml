@@ -10,5 +10,5 @@ jobs:
   release:
     uses: SanctumLabs/ci-workflows/.github/workflows/release.yml@main
     with:
-        name: ${{ github.ref }}
-        tag_name: ${{ github.ref }} 
+        name: ${{ github.ref_name }}
+        tag_name: ${{ github.ref_name }} 
