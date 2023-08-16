@@ -4,15 +4,15 @@ deps:
   - remote: buf.build
     owner: envoyproxy
     repository: protoc-gen-validate
-    commit: 6607b10f00ed4a3d98f906807131c44a
-    digest: shake256:acc7b2ededb2f88d296862943a003b157bdb68ec93ed13dcd8566b2d06e47993ea6daf12013b9655658aaf6bbdb141cf65bfe400ce2870f4654b0a5b45e57c09
+    commit: eac44469a7af47e7839a7f1f3d7ac004
+    digest: shake256:0feabcde01b6b11e3c75a5e3f807968d5995626546f39c37e5d4205892b3a59cced0ed83b35a2eb9e6dddd3309660ad46b737c9dcd224b425de0a6654ce04417
   - remote: buf.build
     owner: sanctumlabs
     repository: events
-    commit: 0a904897cda743ecacbdff5bc55336af
-    digest: shake256:baafb708bea901f321e37a4da965645d6b787577bb44e8e204a38bebbc3040bc7397766897b87a0208e6aaf70a980a5b9131d05ed20fe215b55eb98178ab1e5c
+    commit: 0c24427eff3343dd8ba37da85f138d0c
+    digest: shake256:355af763a64f96cd814331ab02c57bace5828db904d21e4c307fd72d6441602b7d0293ef2966716d7b1322d04457337e56501887f8bb29756635fa32938688c4
   - remote: buf.build
     owner: sanctumlabs
     repository: shared
-    commit: 85f7cc0ad08b4f47887b1dcd28b137b9
-    digest: shake256:65a08e5fcff5b79260a722ca231687e85c8afac7f922a38f7601f0e0f97a1267316c7603afa578324c501cc36e0b2e27a176147e352c150ed70ce59d344e3a20
+    commit: 5f13d49512c84504ac0cedc518bce507
+    digest: shake256:859961245391c816826a3574f02031e8fb8587f1f716d1bff064936ff4245843716400bff887df2932ce4c752bb36e219ee2ea38c1d3787fdafd77ee725b2306
