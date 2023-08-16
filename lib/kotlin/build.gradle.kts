@@ -116,14 +116,15 @@ publishing {
   }
 }
 
-signing {
-  sign(publishing.publications["library"])
-}
-
-tasks {
-  javadoc {
-    if (JavaVersion.current().isJava9Compatible) {
-      (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
-    }
-  }
-}
+// TODO: setup signing of artifact
+//signing {
+//  sign(publishing.publications["library"])
+//}
+//
+//tasks {
+//  javadoc {
+//    if (JavaVersion.current().isJava9Compatible) {
+//      (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+//    }
+//  }
+//}
