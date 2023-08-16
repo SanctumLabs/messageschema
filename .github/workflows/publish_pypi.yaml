@@ -26,10 +26,11 @@ jobs:
       - name: Generate
         run: buf generate
 
-
       - name: Publish
         env:
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}      
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          PACKAGE_VERSION: ${{ github.ref_name }}
         run: |
+          echo Releasing PyPI Package verion ${{ github.ref_name }}
           cd lib/python
           make publish-pypi
