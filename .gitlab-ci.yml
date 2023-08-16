@@ -73,11 +73,11 @@ push-buf-registry:
     - buf mod update
     - cd ..
     - buf push shared -t "${CI_COMMIT_TAG}"
-    - cd .. && cd events
+    - cd events
     - buf mod update
     - cd ..
     - buf push events -t "${CI_COMMIT_TAG}"
-    - cd .. && cd messages
+    - cd messages
     - buf mod update
     - cd ..
     - buf push messages -t "${CI_COMMIT_TAG}"
