@@ -1,6 +1,6 @@
 # Messages
 
-Defines the message schemas for different types of message transports.
+Defines the message schemas which will contain different types of payload events. The messages defined here need not necessarily use the event schemas from [events](../events/), but could be used to compose messages that contain the events as payloads further making it easer to have 1 unified message type. But, again, this is not a hard requirement and these message schemas could be used to transport message data over the wire, for example, HTTP requests from 1 service to another via [gRPC](https://grpc.io/) for example.
 
 ## Pre-requisites
 

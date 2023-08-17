@@ -1,6 +1,6 @@
 # Shared
 
-Shared message schemas used across the library.
+Shared message schemas used across the library. These are common message schema formats that are used in either events or messages and rarely ever change. For example, the format for an address will most likely remain the same & if a field is ever added or removed, this can still be used across the platform.
 
 ## Pre-requisites
 
