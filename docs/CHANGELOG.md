@@ -1,3 +1,10 @@
+# [0.8.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.7.0...0.8.0) (2023-08-18)
+
+
+### Features
+
+* **lib:** js lib with ts bindings ([bb68c80](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/bb68c804aae08f90c2c40ee18cc17986f5a1276e))
+
 # [0.7.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.6.1...0.7.0) (2023-08-16)
 
 
