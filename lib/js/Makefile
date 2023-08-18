@@ -40,8 +40,6 @@ install: ## install Javascript dependencies
 .PHONY: build
 build: clean ## build package
 	npm run build
-	cp README.md ./dist
-	cp package.json ./dist
 
 .PHONY: publish-npm
 publish-npm: build ## publish js package to NPM

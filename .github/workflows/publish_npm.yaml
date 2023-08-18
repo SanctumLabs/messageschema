@@ -46,7 +46,7 @@ jobs:
           cd lib/js
           make build
           npm version ${{ github.ref_name }}
-          npm publish ./dist
+          npm publish
 
   publish-npm-registry:
     runs-on: ubuntu-latest
@@ -81,4 +81,4 @@ jobs:
           cd lib/js
           make build
           npm version ${{ github.ref_name }}
-          npm publish ./dist
+          npm publish
