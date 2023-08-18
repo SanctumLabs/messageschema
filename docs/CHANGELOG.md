@@ -1,3 +1,10 @@
+## [0.8.1](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.8.0...0.8.1) (2023-08-18)
+
+
+### Bug Fixes
+
+* **lib:** js versioning ([ec5a81c](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/ec5a81c01d344780fdcc539e4d1e5c44425276a4))
+
 # [0.8.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.7.0...0.8.0) (2023-08-18)
 
 
