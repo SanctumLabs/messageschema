@@ -1,12 +1,6 @@
-# Message Definitions JavaScript library
+# Message Schema JavaScript library
 
-Message definitions library in JavaScript. This library is packaged and published to 3 registries:
-
-- NPM
-- Gitlab Package Registry
-- Github NPM Registry
-
-Below are steps to get you setup to use the library, build it & possibly package it.
+Message schema library in JavaScript. This can be used as the canonical way of carrying message data or event data in a platform between services in a distributed architecture. This is especially useful in an event driven architecture setup where events are how services communicate with each other.
 
 ## Setup
 

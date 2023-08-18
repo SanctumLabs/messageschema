@@ -12,8 +12,9 @@ plugins:
   - plugin: buf.build/protocolbuffers/kotlin:v23.4
     out: lib/kotlin/src/main/kotlin
     revision: 1
-  - plugin: buf.build/protocolbuffers/js:v3.21.2
+  - plugin: buf.build/bufbuild/es:v1.3.0
     out: lib/js/sanctumlabs
+    opt: target=ts
     revision: 1
   - plugin: buf.build/protocolbuffers/go:v1.31.0
     out: lib/go

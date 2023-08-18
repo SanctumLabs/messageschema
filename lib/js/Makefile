@@ -26,24 +26,27 @@ help: ## describe all commands
 	@grep -E '^[a-zA-Z_]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: default
+
 default: build
 
 .PHONY: clean
 clean: ## removes packaged JS library
-	rm -rf build/
+	rm -rf dist/
 
 .PHONY: install
 install: ## install Javascript dependencies
 	npm install
 
 .PHONY: build
-build: clean ## build js package
-	npm install
+build: clean ## build package
+	npm run build
+	cp README.md ./dist
+	cp package.json ./dist
 
 .PHONY: publish-npm
 publish-npm: build ## publish js package to NPM
-	npm publish
+	npm publish ./dist
 
 .PHONY: publish-gitlab
 publish-gitlab: build ## publish js package to Gitlab package registry
-	NPM_TOKEN=${CI_JOB_TOKEN} npm publish
+	NPM_TOKEN=${CI_JOB_TOKEN} npm publish ./dist
