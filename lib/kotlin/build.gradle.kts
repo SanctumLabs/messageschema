@@ -116,15 +116,17 @@ publishing {
   }
 }
 
-// TODO: setup signing of artifact
-//signing {
-//  sign(publishing.publications["library"])
-//}
-//
-//tasks {
-//  javadoc {
-//    if (JavaVersion.current().isJava9Compatible) {
-//      (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
-//    }
-//  }
-//}
+signing {
+  val signingKey: String? by project
+  val signingPassword: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassword)
+  sign(publishing.publications["library"])
+}
+
+tasks {
+  javadoc {
+    if (JavaVersion.current().isJava9Compatible) {
+      (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+    }
+  }
+}

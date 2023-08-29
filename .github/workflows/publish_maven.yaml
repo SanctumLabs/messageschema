@@ -39,6 +39,8 @@ jobs:
           arguments: |
             publishLibraryPublicationToGithubRepository
             -Pversion=${{ github.ref_name }}
+            -PsigningKey=${{ secrets.SIGNING_KEY }}
+            -PsigningPassword=${{ secrets.SIGNING_PASSWORD }}
           build-root-directory: lib/kotlin
         env:
 #          until we have a maven central repository
@@ -46,3 +48,5 @@ jobs:
 #          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
           GH_RELEASE_ACTOR: ${{ secrets.GH_RELEASE_TOKEN }}
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+          SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
