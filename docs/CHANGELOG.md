@@ -1,3 +1,10 @@
+# [0.9.0](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.8.1...0.9.0) (2023-09-06)
+
+
+### Features
+
+* **lib:** kotlin maven signing plugin ([db2c82e](https://gitlab.com/sanctumlabs/libraries/messageschema/commit/db2c82e4147f32b10426def75bbba765161b6c01))
+
 ## [0.8.1](https://gitlab.com/sanctumlabs/libraries/messageschema/compare/0.8.0...0.8.1) (2023-08-18)
 
 
