@@ -1,10 +1,14 @@
 import java.net.URI
+import java.util.Base64
 
 val gitlabGroupID: String by project
 val gitlabProjectID: String by project
 val gitLabTokenName: String by project
 val gitLabPrivateToken: String by project
 val version: String by project
+val signingKeyId: String by project
+val signingKey: String by project
+val signingPassword: String by project
 
 buildscript {
   repositories {
@@ -116,9 +120,15 @@ publishing {
   }
 }
 
+/**
+ * Converts keys to a Base64 encoded format with no line breaks. Useful in public CI servers
+ */
+fun base64Decode(encodedString: String): String {
+  val decoded = Base64.getDecoder().decode(encodedString)
+  return String(decoded).trim()
+}
+
 signing {
-  val signingKey: String? by project
-  val signingPassword: String? by project
   useInMemoryPgpKeys(signingKey, signingPassword)
   sign(publishing.publications["library"])
 }

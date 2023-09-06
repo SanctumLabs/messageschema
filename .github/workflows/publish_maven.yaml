@@ -39,6 +39,7 @@ jobs:
           arguments: |
             publishLibraryPublicationToGithubRepository
             -Pversion=${{ github.ref_name }}
+            -PsigningKeyId=${{ secrets.SIGNING_KEY_ID }}
             -PsigningKey=${{ secrets.SIGNING_KEY }}
             -PsigningPassword=${{ secrets.SIGNING_PASSWORD }}
           build-root-directory: lib/kotlin
