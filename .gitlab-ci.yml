@@ -67,6 +67,8 @@ generate:
 
 push-buf-registry:
   stage: package
+  needs:
+    - generate
   script:
     - echo ${BUF_API_TOKEN} | buf registry login --username ${BUF_USER} --token-stdin
     - cd shared
@@ -90,10 +92,7 @@ publish-pypi:
   stage: package
   image: python:3.8
   needs:
-    - push-buf-registry
-  before_script:
-    - ./bin/ci/buf-setup.sh
-    - buf generate
+    - generate
   script:
     - cd lib/python
     - make publish-gitlab
@@ -104,10 +103,7 @@ publish-npm:
   stage: package
   image: node:20.4.0
   needs:
-    - push-buf-registry
-  before_script:
-    - ./bin/ci/buf-setup.sh
-    - buf generate
+    - generate
   script:
     - cd lib/js
     - make build
@@ -122,14 +118,12 @@ publish-maven:
   stage: package
   image: gradle:7.4-jdk8
   needs:
-    - push-buf-registry
-  before_script:
-    - ./bin/ci/buf-setup.sh
-    - buf generate
+    - generate
   script:
     - cd lib/kotlin
+    - echo signingKey=${SIGNING_KEY} > gradle.properties
     - ./gradlew -Pversion="${CI_COMMIT_TAG}" build 
-    - ./gradlew -PsigningKeyId=${SIGNING_KEY_ID} -PsigningKey=${SIGNING_KEY} -PsigningPassword=${SIGNING_PASSWORD} -Pversion="${CI_COMMIT_TAG}" -PgitlabProjectID="${CI_PROJECT_ID}" -PgitLabPrivateToken=${CI_PROJECT_ID} -PgitLabTokenName=Job-Token publishLibraryPublicationToGitlabRepository
+    - ./gradlew -PsigningKeyId=${SIGNING_KEY_ID} -PsigningPassword=${SIGNING_PASSWORD} -Pversion="${CI_COMMIT_TAG}" -PgitlabProjectID="${CI_PROJECT_ID}" -PgitLabPrivateToken=${CI_PROJECT_ID} -PgitLabTokenName=Job-Token publishLibraryPublicationToGitlabRepository
   only:
     - tags
 
@@ -154,7 +148,7 @@ release_job:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   rules:
-    - if: $CI_COMMIT_TAG
+    - if: "$CI_COMMIT_TAG"
   script:
     - echo "running release_job"
   release:

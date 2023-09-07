@@ -32,6 +32,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
+      - name: Update gradle.properties
+        shell: bash
+        run: |
+          echo version=${{ github.ref_name }} > gradle.properties
+          echo signingKeyId=${{ secrets.SIGNING_KEY_ID }} >> gradle.properties
+          echo signingKey=${{ secrets.SIGNING_KEY }} >> gradle.properties
+          echo signingPassword=${{ secrets.SIGNING_PASSWORD }} >> gradle.properties
+
       # reference : https://github.com/gradle/gradle-build-action
       - name: Publish Packages
         uses: gradle/gradle-build-action@v2
@@ -40,13 +48,9 @@ jobs:
             publishLibraryPublicationToGithubRepository
             -Pversion=${{ github.ref_name }}
             -PsigningKeyId=${{ secrets.SIGNING_KEY_ID }}
-            -PsigningKey=${{ secrets.SIGNING_KEY }}
             -PsigningPassword=${{ secrets.SIGNING_PASSWORD }}
           build-root-directory: lib/kotlin
         env:
-#          until we have a maven central repository
-#          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           GH_PACKAGE_TOKEN: ${{ secrets.GH_PACKAGE_TOKEN }}
           GH_RELEASE_ACTOR: ${{ secrets.GH_RELEASE_TOKEN }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
