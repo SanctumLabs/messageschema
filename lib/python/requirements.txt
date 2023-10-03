@@ -19,7 +19,7 @@ packaging==23.1
 pep517==0.13.0
 pkginfo==1.9.6
 protobuf==4.22.4
-protoc-gen-validate==1.0.0
+protoc-gen-validate==1.0.2
 Pygments==2.15.1
 pyparsing==3.0.9
 pyproject_hooks==1.0.0
