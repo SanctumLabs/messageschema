@@ -9,7 +9,7 @@ docutils==0.19
 idna==3.7
 importlib-metadata==7.0.1
 jaraco.classes==3.2.3
-Jinja2==3.1.2
+Jinja2==3.1.6
 keyring==23.13.1
 markdown-it-py==2.2.0
 MarkupSafe==2.1.2
