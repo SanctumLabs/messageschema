@@ -27,7 +27,7 @@ readme-renderer==37.3
 requests==2.32.4
 requests-toolbelt==1.0.0
 rfc3986==2.0.0
-rich==13.3.5
+rich==14.2.0
 six==1.16.0
 tomli==2.0.1
 tqdm==4.66.3
