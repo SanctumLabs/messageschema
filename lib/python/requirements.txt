@@ -21,7 +21,7 @@ pkginfo==1.12.1.2
 protobuf==4.25.8
 protoc-gen-validate==1.2.1
 Pygments==2.15.1
-pyparsing==3.0.9
+pyparsing==3.2.5
 pyproject_hooks==1.0.0
 readme-renderer==37.3
 requests==2.32.4
