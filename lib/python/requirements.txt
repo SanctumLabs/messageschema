@@ -20,7 +20,7 @@ pep517==0.13.0
 pkginfo==1.12.1.2
 protobuf==4.25.8
 protoc-gen-validate==1.2.1
-Pygments==2.15.1
+Pygments==2.19.2
 pyparsing==3.2.5
 pyproject_hooks==1.0.0
 readme-renderer==44.0
