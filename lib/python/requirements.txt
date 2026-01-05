@@ -7,7 +7,7 @@ colorama==0.4.6
 commonmark==0.9.1
 docutils==0.22.4
 idna==3.11
-importlib-metadata==7.0.1
+importlib-metadata==8.7.1
 jaraco.classes==3.4.0
 Jinja2==3.1.6
 keyring==23.13.1
