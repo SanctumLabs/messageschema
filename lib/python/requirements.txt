@@ -1,6 +1,6 @@
 astunparse==1.6.3
 bleach==6.3.0
-build==1.4.0
+build==1.4.2
 certifi==2026.2.25
 charset-normalizer==3.4.6
 colorama==0.4.6
