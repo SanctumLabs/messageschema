@@ -1,5 +1,5 @@
 astunparse==1.6.3
-bleach==6.3.0
+bleach==6.4.0
 build==1.4.4
 certifi==2026.6.17
 charset-normalizer==3.4.7
