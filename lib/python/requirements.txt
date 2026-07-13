@@ -30,7 +30,7 @@ rfc3986==2.0.0
 rich==15.0.0
 six==1.17.0
 tomli==2.4.1
-tqdm==4.68.3
+tqdm==4.68.4
 twine==6.2.0
 urllib3==2.7.0
 validate-email==1.3
