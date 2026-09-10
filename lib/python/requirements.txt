@@ -23,7 +23,7 @@ protoc-gen-validate==1.3.3
 Pygments==2.21.0
 pyparsing==3.3.2
 pyproject_hooks==1.2.0
-readme-renderer==45.0
+readme-renderer==46.0
 requests==2.34.2
 requests-toolbelt==1.0.0
 rfc3986==2.0.0
